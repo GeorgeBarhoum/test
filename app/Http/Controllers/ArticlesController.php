@@ -113,7 +113,7 @@ class ArticlesController extends Controller
     {
         $key = trim($request->get('q'));
 
-        $articless = articles::query()
+        $articless = Articles::query()
             ->where('title', 'like', "%{$key}%")
             ->orWhere('content', 'like', "%{$key}%")
             ->orderBy('created_at', 'desc')
