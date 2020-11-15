@@ -29,7 +29,7 @@
 
           <!--$user->role->permission()instead of this for restrict in users you have to use Gates in laravel documentation provided-->
 
-          @can('posts.create',Auth::user())
+          @can('articles.create',Auth::user())
 
 
           <a class="col-lg-offset-5 btn btn-success" href="{{ route('post.create') }}">Add New</a>
@@ -58,30 +58,30 @@
                   <th>Sub Title</th>
                   <th>Slug</th>
                   <th>Created At</th>
-                  @can('posts.update',Auth::user())
+                  @can('articles.update',Auth::user())
                   <th>Edit</th>
                   @endcan
                   
-                  @can('posts.delete',Auth::user())
+                  @can('articles.delete',Auth::user())
                   <th>Delete</th>
                   @endcan
                 </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($posts as $post)
+                    @foreach($articles as $post)
                     <tr>
                     <td>{{ $loop->index + 1}}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->subtitle }}</td>
                     <td>{{ $post->slug }}</td>
                     <td>{{ $post->created_at }}</td>
-                    @can('posts.update',Auth::user())
+                    @can('articles.update',Auth::user())
                       <td><!-- edit button code -->
                       <a href="{{ route('post.edit',$post->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                     @endcan             
                     
-                    @can('posts.delete',Auth::user())            
+                    @can('articles.delete',Auth::user())            
                     <td><!-- delete button code --> 
                       <form id="delete-form-{{ $post->id }}" method="post" action="{{ route('post.destroy',$post->id) }}" style="display: none">
                       {{ csrf_field() }}
@@ -107,14 +107,13 @@
                 <tr>
                   <th>S.No</th>
                   <th>Title</th>
-                  <th>Sub Title</th>
                   <th>Slug</th>
                   <th>Created At</th>
-                  @can('posts.update',Auth::user())
+                  @can('articles.update',Auth::user())
                   <th>Edit</th>
                   @endcan
                   
-                  @can('posts.delete',Auth::user())
+                  @can('articles.delete',Auth::user())
                   <th>Delete</th>
                   @endcan
                 </tr>

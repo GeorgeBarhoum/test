@@ -150,7 +150,7 @@ class ArticlesController extends Controller
      */
     public function edit(Articles $articles)
     {
-        if (Auth::user()){//->can('articles.update')){
+        if (Auth::user())->can('articles.update')){
             $articles = Articles::with('likes','categories')->where('id',$id)->first(); //you can use get() instead of first()
             $likes = Like::all();
             $categories = Category::all();
