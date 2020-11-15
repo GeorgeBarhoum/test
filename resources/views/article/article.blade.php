@@ -1,7 +1,7 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
 @section('headSection')
-<link rel="stylesheet" type="text/css" href="{{asset('admin/plugins/select2/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/select2/select2.min.css')}}">
 
 @endsection()
 
@@ -11,7 +11,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      @include('admin.layouts.pageHead')
+      @include('layouts.pageHead')
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Forms</a></li>
@@ -35,7 +35,7 @@
             @endif  or to write this code we can create a separate file and include it -->
            @include('includes.messages')
             <!-- form start -->
-            <form role="form" action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">              
+            <form role="form" action="{{ route('article.store') }}" method="article" enctype="multipart/form-data">              
               {{ csrf_field() }}
 
               
@@ -43,17 +43,12 @@
               	<div class="col-md-6">  
 
               	<div class="form-group">
-                  <label for="title">Post-Title</label>
+                  <label for="title">article-Title</label>
                   <input type="text" class="form-control" id="title" name="title" placeholder="Title">
                 </div>              
             
                 <div class="form-group">
-                  <label for="subtitle">Post-Sub-Title</label>
-                  <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Sub Title">
-                </div>
-            
-                <div class="form-group">
-                  <label for="slug">Post Slug</label>
+                  <label for="slug">article Slug</label>
                   <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
                 </div>
 
@@ -75,10 +70,10 @@
               <br>
     
               <div class="form-group" style="margin-top:18px;">
-                <label>Select Tags</label>
-                <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="tags[]">
-                  @foreach($tags as $tag)
-                  <option value="{{ $tag->id }}">{{ $tag->name}}</option>
+                <label>Select likes</label>
+                <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="likes[]">
+                  @foreach($likes as $like)
+                  <option value="{{ $like->id }}">{{ $like->name}}</option>
                   @endforeach
                   </select>
               </div>  
@@ -98,7 +93,7 @@
               <!-- /.box-body -->
               <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Write Post
+              <h3 class="box-title">Write article
                 <small>Simple and fast</small>
               </h3>
               <!-- tools box -->
@@ -118,7 +113,7 @@
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-round btn-success">Submit</button>
-                <a href="{{route('post.index')}}" class="btn btn-warning">Back</a>
+                <a href="{{route('article.index')}}" class="btn btn-warning">Back</a>
 
               </div>
           </form>
@@ -140,9 +135,9 @@
 
 @section('footerSection')
 
-<script src="{{asset('admin/plugins/select2/select2.full.min.js')}}"></script>
+<script src="{{asset('plugins/select2/select2.full.min.js')}}"></script>
 <!--<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script> -->
-<script src="{{ asset('admin/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
     $(function () {
       // Replace the <textarea id="editor1"> with a CKEditor
@@ -153,7 +148,7 @@
 <script>
   
   $(document).ready(function() {
-    $(".select2").select2();
+    $("select2").select2();
   });
 </script>
 

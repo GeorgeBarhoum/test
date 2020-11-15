@@ -1,8 +1,8 @@
-@extends('admin.layouts.app')
-<!--as it is paste the all content of post.blade.php and write extra few codes for edit -->
+@extends('layouts.app')
+<!--as it is paste the all content of Article.blade.php and write extra few codes for edit -->
 
 @section('headSection')
-<link rel="stylesheet" type="text/css" href="{{asset('admin/plugins/select2/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/select2/select2.min.css')}}">
 
 @endsection()
 
@@ -13,9 +13,9 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      @include('admin.layouts.pageHead')
+      @include('layouts.pageHead')
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
         <li><a href="#">Forms</a></li>
         <li class="active">Editors</li>
       </ol>
@@ -37,7 +37,7 @@
             @endif  or to write this code we can create a separate file and include it -->
            @include('includes.messages')
             <!-- form start -->
-            <form role="form" action="{{ route('post.update', $post->id) }}" method="post" enctype="multipart/form-data">              
+            <form role="form" action="{{ route('article.update', $article->id) }}" method="Article" enctype="multipart/form-data">              
               {{ csrf_field() }}
               {{ method_field('PUT')}}
               
@@ -45,18 +45,13 @@
               	<div class="col-md-6">  
 
               	<div class="form-group">
-                  <label for="title">Post-Title</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ $post->title }}">
+                  <label for="title">Article-Title</label>
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ $Article->title }}">
                 </div>              
             
                 <div class="form-group">
-                  <label for="subtitle">Post-Sub-Title</label>
-                  <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Sub Title" value="{{ $post->subtitle }}">
-                </div>
-            
-                <div class="form-group">
-                  <label for="slug">Post Slug</label>
-                  <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug" value="{{ $post->slug }}">
+                  <label for="slug">Article Slug</label>
+                  <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug" value="{{ $Article->slug }}">
                 </div>
 
               	</div>  
@@ -69,7 +64,7 @@
                   </div>
                   <div class="checkbox" class="pull-left">
                     <label>
-                  <input type="checkbox" name="status" value="1" @if ($post->status==1)
+                  <input type="checkbox" name="status" value="1" @if ($article->status==1)
                   {{'checked'}} 
                   @endif> Publish
                     </label>
@@ -78,16 +73,16 @@
               <br>
     
       <div class="form-group" style="margin-top:18px;">
-                <label>Select Tags</label>
-                <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="tags[]">
-                  @foreach($tags as $tag)
-                  <option value="{{ $tag->id }}"
-                    @foreach($post->tags as $postTag)
-                      @if($postTag->id == $tag->id)
+                <label>Select Likes</label>
+                <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="likes[]">
+                  @foreach($likes as $like)
+                  <option value="{{ $like->id }}"
+                    @foreach($Article->likes as $articlelike)
+                      @if($articlelike->id == $like->id)
                         selected
                       @endif
                     @endforeach
-                    >{{ $tag->name}}</option>
+                    >{{ $like->name}}</option>
                   @endforeach
                   </select>
               </div>  
@@ -97,8 +92,8 @@
                 <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="categories[]">
                  @foreach($categories as $category)
                   <option value="{{ $category->id }}"
-                      @foreach($post->categories as $postCategory)
-                      @if($postCategory->id == $category->id)
+                      @foreach($article->categories as $articleCategory)
+                      @if($articleCategory->id == $category->id)
                         selected
                       @endif
                     @endforeach
@@ -113,7 +108,7 @@
               <!-- /.box-body -->
               <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Write Post
+              <h3 class="box-title">Write Article
                 <small>Simple and fast</small>
               </h3>
               <!-- tools box -->
@@ -128,7 +123,7 @@
 
           
             <div class="box-body pad">
-            <textarea class="textarea" placeholder="Place some text here" name="body" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" id="editor1">{{ $post->body }}
+            <textarea class="textarea" placeholder="Place some text here" name="body" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" id="editor1">{{ $Article->body }}
               
             </textarea>
             
@@ -139,7 +134,7 @@
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-round btn-success">Submit</button>
-                <a href="{{route('post.index')}}" class="btn btn-warning">Back</a>
+                <a href="{{route('Article.index')}}" class="btn btn-warning">Back</a>
 
               </div>
           </form>
@@ -164,7 +159,7 @@
 <script src="{{asset('admin/plugins/select2/select2.full.min.js')}}"></script>
 <!-- CKeditor-->
 <!--<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>  instead of this we can use other method new downloaded file code below-->
-<script src="{{ asset('admin/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
     $(function () {
       // Replace the <textarea id="editor1"> with a CKEditor

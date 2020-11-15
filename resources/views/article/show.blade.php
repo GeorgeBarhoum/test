@@ -1,10 +1,10 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
 @section('main-content')
 
 @section('headSection')
 
-<link rel="stylesheet" type="text/css" href="{{ asset('admin/plugins/datatables/dataTables.bootstrap.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
 
 @endsection()
 
@@ -32,7 +32,7 @@
           @can('articles.create',Auth::user())
 
 
-          <a class="col-lg-offset-5 btn btn-success" href="{{ route('post.create') }}">Add New</a>
+          <a class="col-lg-offset-5 btn btn-success" href="{{ route('article.create') }}">Add New</a>
 
           @endcan
 
@@ -69,21 +69,21 @@
                 </thead>
                 <tbody>
 
-                    @foreach($articles as $post)
+                    @foreach($articles as $article)
                     <tr>
                     <td>{{ $loop->index + 1}}</td>
-                    <td>{{ $post->title }}</td>
-                    <td>{{ $post->subtitle }}</td>
-                    <td>{{ $post->slug }}</td>
-                    <td>{{ $post->created_at }}</td>
+                    <td>{{ $article->title }}</td>
+                    <td>{{ $article->subtitle }}</td>
+                    <td>{{ $article->slug }}</td>
+                    <td>{{ $article->created_at }}</td>
                     @can('articles.update',Auth::user())
                       <td><!-- edit button code -->
-                      <a href="{{ route('post.edit',$post->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                      <a href="{{ route('article.edit',$article->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                     @endcan             
                     
                     @can('articles.delete',Auth::user())            
                     <td><!-- delete button code --> 
-                      <form id="delete-form-{{ $post->id }}" method="post" action="{{ route('post.destroy',$post->id) }}" style="display: none">
+                      <form id="delete-form-{{ $article->id }}" method="article" action="{{ route('article.destroy',$article->id) }}" style="display: none">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
                     </form>
@@ -91,7 +91,7 @@
                     if(confirm('Are you sure, Delete this'))
                     {
                       event.preventDefault();
-                      document.getElementById('delete-form-{{ $post->id }}').submit();
+                      document.getElementById('delete-form-{{ $article->id }}').submit();
                     }
                       else{
                         event.preventDefault();
@@ -138,8 +138,8 @@
 @endsection()
 
 @section('footerSection')
-<script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 <script>
   $(function () {
     $("#example1").DataTable();
