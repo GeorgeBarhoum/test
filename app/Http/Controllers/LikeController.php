@@ -6,18 +6,19 @@ use App\Models\Articles;
 use App\Models\Category;
 use App\Models\Like;
 use Illuminate\Http\Request;
+use GuzzleHttp\Middleware;
 
 class LikeController extends Controller
 {
     public function __invoke($slug)
     {
-        //get the requested like
-        $like = Like::query()
-            ->where('slug', $slug)
-            ->firstOrFail();
+        // //get the requested like
+        // $like = Like::query()
+        //     ->where('slug', $slug)
+        //     ->firstOrFail();
 
         //get the articles with that like
-        $articles = $like->articles()
+        $articles = $likes->articles()
             ->where('is_published',true)
             ->orderBy('id','desc')
             ->paginate(env('PAGE_NUMBER'));
