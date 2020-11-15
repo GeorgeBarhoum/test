@@ -150,13 +150,13 @@ class ArticlesController extends Controller
      */
     public function edit(Articles $articles)
     {
-        if (Auth::user())->can('articles.update')){
-            $articles = Articles::with('likes','categories')->where('id',$id)->first(); //you can use get() instead of first()
-            $likes = Like::all();
-            $categories = Category::all();
-            return view('admin.articles.edit',compact('likes','categories','articles'));
-        //return view('admin.articles.edit',compact('articles'));
-        }
+        // if (Auth::user()->can('articles.update')){
+        //     $articles = Articles::with('likes','categories')->where('id',$id)->first(); //you can use get() instead of first()
+        //     $likes = Like::all();
+        //     $categories = Category::all();
+        //     return view('admin.articles.edit',compact('likes','categories','articles'));
+        // //return view('admin.articles.edit',compact('articles'));
+        // }
         return redirect(route('home'));
     }
 
@@ -204,7 +204,7 @@ class ArticlesController extends Controller
      */
     public function destroy(Articles $articles)
     {
-        Articles::where('id',$id)->delete();
+        Articles::where('id',$articles->id)->delete();
         return redirect()->back();
     }
 }
