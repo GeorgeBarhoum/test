@@ -37,7 +37,7 @@ Route::get('/category', [CategoryController::class, 'index']);
 //Route::get('/like', [LikeController::class, '']);
 Route::get('/article', [ArticlesController::class, 'show']);
 Route::get('/search', [ArticlesController::class, 'search']);
-//Route::get('/logout', 'UserController@logout');
+Route::get('/logout', 'UserController@logout');
 // Route::group(['prefix' => 'auth'], function () {
 //   Auth::routes();
 // });
