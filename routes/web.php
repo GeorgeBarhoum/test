@@ -34,7 +34,7 @@ Route::get('/articles/create', [App\Http\Controllers\ArticlesController::class, 
 
 //Route::get('/', HomeController::class);
 Route::get('/category', [CategoryController::class, 'index']);
-//Route::get('/like', [LikeController::class, '']);
+Route::get('/like', [LikeController::class, 'index']);
 Route::get('/article', [ArticlesController::class, 'show']);
 Route::get('/search', [ArticlesController::class, 'search']);
 Route::get('/logout', 'UserController@logout');
