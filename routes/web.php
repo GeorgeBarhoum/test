@@ -42,31 +42,32 @@ Route::get('/logout', 'UserController@logout');
 //   Auth::routes();
 // });
 
+//users profile
+Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
+// display list of articles
+Route::get('user/{id}/articles', 'UserController@user_articles')->where('id', '[0-9]+');
+// display single article
+Route::get('/{slug}', ['as' => 'article', 'uses' => 'ArticlesController@show'])->where('slug', '[A-Za-z0-9-_]+');
+
 // check for logged in user
 Route::middleware(['auth'])->group(function () {
   // show new article form
   Route::get('new-article', 'ArticlesController@create');
   // save new article
-  //Route::article('new-article', 'ArticlesController@store');
+  Route::post('new-article', 'ArticlesController@store');
   // edit article form
   Route::get('edit/{slug}', 'ArticlesController@edit');
   // update article
-  //Route::article('update', 'ArticlesController@update');
+  Route::put('update', 'ArticlesController@update');
   // delete article
   Route::get('delete/{id}', 'ArticlesController@destroy');
   // display user's all articles
- // Route::get('my-all-articles', 'UserController@user_articles_all');
+  Route::get('my-all-articles', 'UserController@user_articles_all');
   // display user's drafts
   //Route::get('my-drafts', 'UserController@user_articles_draft');
   // add comment
-  //Route::article('comment/add', 'CommentController@store');
+  Route::post('comment/add', 'CommentController@store');
   // delete comment
-  //Route::article('comment/delete/{id}', 'CommentController@destroy');
+  Route::delete('comment/delete/{id}', 'CommentController@destroy');
 });
 
-//users profile
-//Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
-// display list of articles
-//Route::get('user/{id}/articles', 'UserController@user_articles')->where('id', '[0-9]+');
-// display single article
-//Route::get('/{slug}', ['as' => 'article', 'uses' => 'ArticlesController@show'])->where('slug', '[A-Za-z0-9-_]+');
